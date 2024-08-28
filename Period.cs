@@ -589,16 +589,16 @@ namespace NodaTime
         [NotNull]
         public static Period Between(LocalDate start, LocalDate end, PeriodUnits units)
         {
+            if (start == end)
+            {
+                return Zero;
+            }
+			
             Preconditions.CheckArgument((units & PeriodUnits.AllTimeUnits) == 0, nameof(units), "Units contains time units: {0}", units);
             Preconditions.CheckArgument(units != 0, nameof(units), "Units must not be empty");
             Preconditions.CheckArgument((units & ~PeriodUnits.AllUnits) == 0, nameof(units), "Units contains an unknown value: {0}", units);
             CalendarSystem calendar = start.Calendar;
             Preconditions.CheckArgument(calendar.Equals(end.Calendar), nameof(end), "start and end must use the same calendar system");
-
-            if (start == end)
-            {
-                return Zero;
-            }
 
             // Optimization for single field
             switch (units)
