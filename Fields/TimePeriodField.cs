@@ -41,9 +41,12 @@ namespace NodaTime.Fields
         internal LocalDateTime Add(LocalDateTime start, long units)
         {
             int extraDays = 0;
-            LocalTime time = Add(start.TimeOfDay, units, ref extraDays);
-            // Even though PlusDays optimizes for "value == 0", it's still quicker not to call it.
-            LocalDate date = extraDays == 0 ? start.Date :  start.Date.PlusDays(extraDays);
+            
+			LocalTime time = Add(start.TimeOfDay, units, ref extraDays);
+            
+			// Even though PlusDays optimizes for "value == 0", it's still quicker not to call it.
+            LocalDate date = extraDays == 0 ? start.Date : start.Date.PlusDays(extraDays);
+			
             return new LocalDateTime(date, time);
         }
 
@@ -89,9 +92,8 @@ namespace NodaTime.Fields
             unchecked
             {
                 if (value == 0)
-                {
                     return localTime;
-                }
+
                 int days = 0;
                 // It's possible that there are better ways to do this, but this at least feels simple.
                 if (value >= 0)
