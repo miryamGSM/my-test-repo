@@ -603,10 +603,14 @@ namespace NodaTime
             // Optimization for single field
             switch (units)
             {
-                case PeriodUnits.Years: return FromYears(DatePeriodFields.YearsField.UnitsBetween(start, end));
-                case PeriodUnits.Months: return FromMonths(DatePeriodFields.MonthsField.UnitsBetween(start, end));
-                case PeriodUnits.Weeks: return FromWeeks(DatePeriodFields.WeeksField.UnitsBetween(start, end));
-                case PeriodUnits.Days: return FromDays(DatePeriodFields.DaysField.UnitsBetween(start, end));
+                case PeriodUnits.Years:
+                    return FromYears(DatePeriodFields.YearsField.UnitsBetween(start, end));
+                case PeriodUnits.Months:
+                    return FromMonths(DatePeriodFields.MonthsField.UnitsBetween(start, end));
+                case PeriodUnits.Weeks:
+                    return FromWeeks(DatePeriodFields.WeeksField.UnitsBetween(start, end));
+                case PeriodUnits.Days:
+                    return FromDays(DatePeriodFields.DaysField.UnitsBetween(start, end));
             }
 
             // Multiple fields
